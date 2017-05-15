@@ -157,6 +157,14 @@ def main():
    
     outputList = list()
     for player in playerDict:
+<<<<<<< HEAD
+        #Change your atts to this down here
+        print(playerDict[player].getAttributes())
+        atts = vars(playerDict[player])
+        a.append(atts)
+    for line in a:
+        file.write(str(line))
+=======
         atts = (playerDict[player].getAttributes())
         outputList.append(atts)
        
@@ -164,6 +172,7 @@ def main():
     
     for line in outputList:
         file.write(str(line).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
+>>>>>>> 1d85184c596981409763d156f32436d5a1fa2bab
         file.write("\n")
     file.close()    
     

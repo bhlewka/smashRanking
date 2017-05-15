@@ -1,3 +1,37 @@
+<<<<<<< HEAD
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['npo', 'jarobi', 'colt'], '_Player__rating': 0.0, 'name': 'crimsonbeast', '_Player__resultList': [0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['merkzr', '2/4lip', 'dotcalm', 'npo'], '_Player__rating': 0.0, 'name': 'justjohn', '_Player__resultList': [1, 0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['medic', 'jedcruz'], '_Player__rating': 0.0, 'name': 'zozzle', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['justjohn', 'umr', 'sqruimple'], '_Player__rating': 0.0, 'name': 'merkzr', '_Player__resultList': [0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['fedoralord552', 'crimsonbeast'], '_Player__rating': 0.0, 'name': 'jarobi', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['sad', 'cinder'], '_Player__rating': 0.0, 'name': 'hettman', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['dotcalm', 'smear', 'merkzr', 'colt'], '_Player__rating': 0.0, 'name': 'sqruimple', '_Player__resultList': [1, 0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['maigai', 'ndiaz', 'dew', 'npo'], '_Player__rating': 0.0, 'name': 'minifedora', '_Player__resultList': [1, 1, 0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['sqruimple', 'fox3345', 'justjohn'], '_Player__rating': 0.0, 'name': 'dotcalm', '_Player__resultList': [0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['fox3345', 'sqruimple', 'pelican', 'dew'], '_Player__rating': 0.0, 'name': 'smear', '_Player__resultList': [1, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['jedcruz', 'hettman', 'medic'], '_Player__rating': 0.0, 'name': 'cinder', '_Player__resultList': [0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['crimsonbeast', 'fedoralord552', 'chicken', 'justjohn', 'minifedora', 'pelican', 'fedoralord552', '2/4lip', 'alphicans'], '_Player__rating': 0.0, 'name': 'npo', '_Player__resultList': [1, 0, 1, 1, 1, 1, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['boof', 'alphicans', 'maigai', 'jedcruz'], '_Player__rating': 0.0, 'name': 'phantom', '_Player__resultList': [1, 0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['minifedora', 'lpm', 'phantom'], '_Player__rating': 0.0, 'name': 'maigai', '_Player__resultList': [0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['ndiaz', 'maigai'], '_Player__rating': 0.0, 'name': 'lpm', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': [], '_Player__rating': 0.0, 'name': 'lucky', '_Player__resultList': []}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['zozzle', 'dew', 'cinder', 'ndiaz', '2/4lip'], '_Player__rating': 0.0, 'name': 'medic', '_Player__resultList': [1, 0, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['hettman', 'jedcruz', 'alphicans', 'colt', '2/4lip'], '_Player__rating': 0.0, 'name': 'sad', '_Player__resultList': [1, 1, 0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['2/4lip', 'merkzr'], '_Player__rating': 0.0, 'name': 'umr', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['colt', 'smear', 'jedcruz', 'npo'], '_Player__rating': 0.0, 'name': 'pelican', '_Player__resultList': [1, 0, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['smear', 'dotcalm'], '_Player__rating': 0.0, 'name': 'fox3345', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['phantom', 'ndiaz'], '_Player__rating': 0.0, 'name': 'boof', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['jarobi', 'npo', '2/4lip', 'alphicans', 'npo'], '_Player__rating': 0.0, 'name': 'fedoralord552', '_Player__resultList': [1, 1, 1, 0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': [], '_Player__rating': 0.0, 'name': 'jraff', '_Player__resultList': []}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['chicken', 'pelican', 'crimsonbeast', 'sqruimple', 'sad'], '_Player__rating': 0.0, 'name': 'colt', '_Player__resultList': [1, 0, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': [], '_Player__rating': 0.0, 'name': 's2j', '_Player__resultList': []}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['medic', 'minifedora', 'smear', 'alphicans'], '_Player__rating': 0.0, 'name': 'dew', '_Player__resultList': [1, 1, 1, 1]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['umr', 'justjohn', 'fedoralord552', 'medic', 'sad', 'npo'], '_Player__rating': 0.0, 'name': '2/4lip', '_Player__resultList': [1, 1, 0, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['colt', 'npo'], '_Player__rating': 0.0, 'name': 'chicken', '_Player__resultList': [0, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['phantom', 'sad', 'fedoralord552', 'dew', 'npo'], '_Player__rating': 0.0, 'name': 'alphicans', '_Player__resultList': [1, 1, 1, 0, 1]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['cinder', 'sad', 'zozzle', 'phantom', 'pelican'], '_Player__rating': 0.0, 'name': 'jedcruz', '_Player__resultList': [1, 0, 1, 1, 0]}
+{'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['lpm', 'minifedora', 'boof', 'medic'], '_Player__rating': 0.0, 'name': 'ndiaz', '_Player__resultList': [1, 0, 1, 0]}
+=======
 name, rating, rd, vol
 sad 1500.0 350.0 0.06
 phantom 1500.0 350.0 0.06
@@ -31,3 +65,4 @@ hettman 1500.0 350.0 0.06
 medic 1500.0 350.0 0.06
 justjohn 1500.0 350.0 0.06
 lpm 1500.0 350.0 0.06
+>>>>>>> 1d85184c596981409763d156f32436d5a1fa2bab
