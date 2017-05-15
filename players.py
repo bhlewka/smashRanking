@@ -5,6 +5,9 @@ from matches import getParticipants
 #problem if a player object doesn't exist ie. add new player a? and you decline
 #if player b has a match with player a it messes up
 
+#if the program is only able to write names and to output file, readElo bugs out 
+#because it will try to convert strings to floats or something
+
 
 #use ben's getParticipants and compares its dictionary values to the input dict's values 
 #returns a list of players
@@ -12,17 +15,20 @@ def updatePlayerList(inputPlayerDict, inputDictionary):
     #read matches.txt file and updates dictionary
     for key, value in inputDictionary.items():
         if value not in inputPlayerDict:
-            userChoice = input("New player: " + value + ". Add as new player or edit tag?\nType in add to add as new player, edit to edit the tag, or press any key to exit.\n")
+            userChoice = input("New player: " + value + ". Add as new player or existing?\nType in add to add as new player, edit to add to existing tag, or type exit to exit.\n")
             if userChoice.lower() == "add":
                 inputPlayerDict[value] = Player(value)
-            else:
-                break
+            #if not userChoice.lower() == "edit":
+                #break
             if userChoice.lower() == "edit":
-                newTag = input("Enter the new tag: ")
-                if newTag not in inputPlayerDict:
+                existingTag = input("Enter the correct tag: ")
+                if existingTag in inputPlayerDict:
+                    inputPlayerDict[value] = inputPlayerDict[existingTag]
+                if existingTag not in inputPlayerDict:
+                    newTag = input("Tag not found. Enter the new tag: ")
                     inputPlayerDict[newTag] = Player(newTag)
-                else: 
-                    break
+            if userChoice.lower() == "exit": 
+                break
             
     return inputPlayerDict
 
@@ -121,7 +127,7 @@ def main():
    
     players = getParticipants(name, apiKey)
     updatePlayerList(playerDict, players)
-    
+
     #update player list text file
     outputFile = open(playerListFile, "w")
     outputFile.write("")
@@ -131,9 +137,15 @@ def main():
         outputFile.write(player + "\n")
     outputFile.close()
 
-
-    matchInput = input("Enter the name of your matches file: " )
-    playerDict = addPlayerMatches(playerDict, playerDict, matchInput)       
+    while(True):
+        matchInput = input("Enter the name of your matches file: " )    
+        try:
+            playerDict = addPlayerMatches(playerDict, playerDict, matchInput)    
+            break
+        except:
+            print("Cannot find the file.")
+            
+    #playerDict = addPlayerMatches(playerDict, playerDict, matchInput)       
     updatePlayers(playerDict)
     
     
