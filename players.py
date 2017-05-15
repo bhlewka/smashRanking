@@ -1,6 +1,13 @@
 from glicko2 import Player
 from matches import getParticipants
 
+#no inactivity implementation, no dq handling
+#problem if a player object doesn't exist ie. add new player a? and you decline
+#if player b has a match with player a it messes up
+
+#if the program is only able to write names and to output file, readElo bugs out 
+#because it will try to convert strings to floats or something
+
 
 #use ben's getParticipants and compares its dictionary values to the input dict's values 
 #returns a list of players
@@ -8,17 +15,20 @@ def updatePlayerList(inputPlayerDict, inputDictionary):
     #read matches.txt file and updates dictionary
     for key, value in inputDictionary.items():
         if value not in inputPlayerDict:
-            userChoice = input("New player: " + value + ". Add as new player or edit tag?\nType in add to add as new player, edit to edit the tag, or press any key to exit.\n")
+            userChoice = input("New player: " + value + ". Add as new player or existing?\nType in add to add as new player, edit to add to existing tag, or type exit to exit.\n")
             if userChoice.lower() == "add":
                 inputPlayerDict[value] = Player(value)
-            else:
-                break
+            #if not userChoice.lower() == "edit":
+                #break
             if userChoice.lower() == "edit":
-                newTag = input("Enter the new tag: ")
-                if newTag not in inputPlayerDict:
+                existingTag = input("Enter the correct tag: ")
+                if existingTag in inputPlayerDict:
+                    inputPlayerDict[value] = inputPlayerDict[existingTag]
+                if existingTag not in inputPlayerDict:
+                    newTag = input("Tag not found. Enter the new tag: ")
                     inputPlayerDict[newTag] = Player(newTag)
-                else: 
-                    break
+            if userChoice.lower() == "exit": 
+                break
             
     return inputPlayerDict
 
@@ -39,110 +49,138 @@ def addPlayerMatches(playerDict, playerList, matches):
     for x in range(1, len(matchOutput), 4):
         if matchOutput[x] > matchOutput[x+2]:
             if matchOutput[x-1] in playerDict:
-                #print("a)
-                playerDict[matchOutput[x-1]].addMatch(matchOutput[x+1], 1)
+                #print("a")
+                playerDict[matchOutput[x-1]].addMatch(playerDict[matchOutput[x+1]], 1)
             if matchOutput[x+1] in playerDict:
                     #print("b")
-                    playerDict[matchOutput[x+1]].addMatch(matchOutput[x-1], 0)
+                    playerDict[matchOutput[x+1]].addMatch(playerDict[matchOutput[x-1]], 0)
                 
         elif matchOutput[x] < matchOutput[x+2] and int(matchOutput[x]) >=0: 
             if matchOutput[x-1] in playerDict:
                     #print("c")
-                playerDict[matchOutput[x-1]].addMatch(matchOutput[x+1], 0) 
+                playerDict[matchOutput[x-1]].addMatch(playerDict[matchOutput[x+1]], 0) 
             if matchOutput[x+1] in playerDict:
                     #print("d")
-                playerDict[matchOutput[x+1]].addMatch(matchOutput[x-1], 1)
+                playerDict[matchOutput[x+1]].addMatch(playerDict[matchOutput[x-1]], 1)
                 
     return playerDict
-                    
-def print_dict(d):
-    new = {}
-    for k, v in d.items():
-        if isinstance(v, dict):
-            v = print_dict(v)
-        new[k.replace('{', '')] = v
-        new[k.replace(':', '')] = v
-    return new
+
+
+#takes dictionary of player objects and updates attributes
+def updatePlayers(playerDict):
+          
+    for player in playerDict:
+        playerDict[player].update_player()
+        
+    return playerDict
+
+#input file format: name, rating, rd, vol
+#updates playerDict with player info from input file
+def readElo(playerInfoInput, playerDict):
+    
+    fileToOpen = open("text.txt", "r")
+    file = fileToOpen.read()
+    file = file.splitlines()
+    try:
+        file.pop(0)
+    except:
+        pass
+    
+    #list containing all info
+    playerInfo = list()
+    for line in file:
+        for person in line.split():
+            playerInfo.append(person)
+
+    #create player objects 
+    #x is name, x+1 is rating, x+2 is rd, x+3 is vol
+    for x in range(0, len(playerInfo), 4):
+        playerDict[playerInfo[x]] = Player(playerInfo[x])
+        playerDict[playerInfo[x]].rating = float(playerInfo[x+1])
+        playerDict[playerInfo[x]].rd = float(playerInfo[x+2])
+        playerDict[playerInfo[x]].vol = float(playerInfo[x+3])
+         
+    return playerDict
+            
 
 def main():
+    
     #input text file of existing players
     while(True):
-        playerListFile = input("Enter the file name of your list of players: ")
+        playerListFile = input("Enter the file name of your list of players and their rating, etc...: ")
         try:
             playerList = open(playerListFile, "r")
             break
         except:
             print("Cannot find the file.")
     
-    #create a dict for existing players from input file
+    #create a dict for players from input file
     playerDict = dict()
-    #only works with input files having names separated by spaces atm
+    #only works with input files having names separated by spaces 
     playerList = playerList.read()
     playerList = playerList.splitlines()
-    for line in playerList:
-        for player in line.split():
-            if player.lower() not in playerDict:
-                playerDict[player] = Player(player)    
-
+    readElo(playerList, playerDict)
+    
     #get rid of hardcode later
     name = "edmmelee-SmashAtCASE042817Melee"
     apiKey = "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE"
    
     players = getParticipants(name, apiKey)
     updatePlayerList(playerDict, players)
-    
+
     #update player list text file
     outputFile = open(playerListFile, "w")
     outputFile.write("")
     outputFile.close()
     outputFile = open(playerListFile, "a")
     for player in playerDict:
-        #print(player)
         outputFile.write(player + "\n")
     outputFile.close()
-    
-    #player objects to be created
 
-    #print(playerDict)
-    matchInput = input("Enter the name of your matches file: " )
-    playerDict = addPlayerMatches(playerDict, playerDict, matchInput)
+    while(True):
+        matchInput = input("Enter the name of your matches file: " )    
+        try:
+            playerDict = addPlayerMatches(playerDict, playerDict, matchInput)    
+            break
+        except:
+            print("Cannot find the file.")
+            
+    #playerDict = addPlayerMatches(playerDict, playerDict, matchInput)       
+    updatePlayers(playerDict)
     
-
     
-    file = open("text.txt", "w")
+    #print player objects to output file    
+    file = open(playerListFile, "w")
     file.write("")
     file.close()
-    file = open("text.txt", "a")
-    
-
-
-    #print opponent list to file (test)           
-    a = list()
+    file = open(playerListFile, "a")
+   
+    outputList = list()
     for player in playerDict:
+<<<<<<< HEAD
         #Change your atts to this down here
         print(playerDict[player].getAttributes())
         atts = vars(playerDict[player])
         a.append(atts)
     for line in a:
         file.write(str(line))
+=======
+        atts = (playerDict[player].getAttributes())
+        outputList.append(atts)
+       
+    file.write("name, rating, rd, vol\n")
+    
+    for line in outputList:
+        file.write(str(line).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
+>>>>>>> 1d85184c596981409763d156f32436d5a1fa2bab
         file.write("\n")
     file.close()    
     
-    file = open("text.txt", "r")
-    file1 = open("lol.txt", "w")
-    
-    file = file.read() 
-    file = file.splitlines()
 
-    for line in file:
-        file1.write(line.replace("{'_", "").replace("}","").replace("'",""))
-        #file1.write(line.replace("}", ""))
-       # print(line.replace("{", ""))
-        file1.write("\n")
+    ##test print
+    #for player in playerDict:
+        #print(playerDict[player].getAttributes())
 
-
-
-    
     
 main()
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['npo', 'jarobi', 'colt'], '_Player__rating': 0.0, 'name': 'crimsonbeast', '_Player__resultList': [0, 1, 0]}
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['merkzr', '2/4lip', 'dotcalm', 'npo'], '_Player__rating': 0.0, 'name': 'justjohn', '_Player__resultList': [1, 0, 1, 0]}
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['medic', 'jedcruz'], '_Player__rating': 0.0, 'name': 'zozzle', '_Player__resultList': [0, 0]}
@@ -30,3 +31,38 @@
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['phantom', 'sad', 'fedoralord552', 'dew', 'npo'], '_Player__rating': 0.0, 'name': 'alphicans', '_Player__resultList': [1, 1, 1, 0, 1]}
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['cinder', 'sad', 'zozzle', 'phantom', 'pelican'], '_Player__rating': 0.0, 'name': 'jedcruz', '_Player__resultList': [1, 0, 1, 1, 0]}
 {'vol': 0.06, '_Player__rd': 2.014761872416068, '_Player__opponentList': ['lpm', 'minifedora', 'boof', 'medic'], '_Player__rating': 0.0, 'name': 'ndiaz', '_Player__resultList': [1, 0, 1, 0]}
+=======
+name, rating, rd, vol
+sad 1500.0 350.0 0.06
+phantom 1500.0 350.0 0.06
+sqruimple 1500.0 350.0 0.06
+fedoralord552 1500.0 350.0 0.06
+minifedora 1500.0 350.0 0.06
+colt 1500.0 350.0 0.06
+zozzle 1500.0 350.0 0.06
+chicken 1500.0 350.0 0.06
+dew 1500.0 350.0 0.06
+s2j 1500.0 350.0 0.06
+crimsonbeast 1500.0 350.0 0.06
+smear 1500.0 350.0 0.06
+alphicans 1500.0 350.0 0.06
+cinder 1500.0 350.0 0.06
+pelican 1500.0 350.0 0.06
+lucky 1500.0 350.0 0.06
+jraff 1500.0 350.0 0.06
+jarobi 1500.0 350.0 0.06
+umr 1500.0 350.0 0.06
+boof 1500.0 350.0 0.06
+2/4lip 1500.0 350.0 0.06
+fox3345 1500.0 350.0 0.06
+ndiaz 1500.0 350.0 0.06
+maigai 1500.0 350.0 0.06
+dotcalm 1500.0 350.0 0.06
+merkzr 1500.0 350.0 0.06
+jedcruz 1500.0 350.0 0.06
+npo 1500.0 350.0 0.06
+hettman 1500.0 350.0 0.06
+medic 1500.0 350.0 0.06
+justjohn 1500.0 350.0 0.06
+lpm 1500.0 350.0 0.06
+>>>>>>> 1d85184c596981409763d156f32436d5a1fa2bab

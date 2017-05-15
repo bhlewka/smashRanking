@@ -200,10 +200,10 @@ class Player:
         name = self.name
         rd = self.rd
         vol = self.vol
-        opponentList = self.opponentList
-        resultList = self.resultList
+        #opponentList = self.opponentList
+        #resultList = self.resultList
         
-        return name, rating, rd, vol, opponentList, resultList
+        return name, rating, rd, vol
         
 
  
