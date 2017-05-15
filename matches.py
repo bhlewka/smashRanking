@@ -143,9 +143,9 @@ def main():
             print("File not found or cannot be opened")
     
     # prepare output file, erasing previous entries
-    outputFile = open("output.txt", "w")
-    outputFile.write("")
-    outputFile.close()
+    #outputFile = open("output.txt", "w")
+    #outputFile.write("")
+    #outputFile.close()
             
     # Create the list of tournaments to process
     file = file.read()  
