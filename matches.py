@@ -104,10 +104,9 @@ def getDate(name, apiKey):
     
     
         
-def outputScores(participants, matches, date):
+def outputScores(participants, matches, date,iteration):
     # participants is participants, to be find/replaced later
-    
-    file = open("output.txt", "a")
+    file = open("output"+str(iteration)+".txt", "a")
     file.write(date)
     file.write('\n')
     # Replace the player id in matches with the player name from player dict
@@ -160,19 +159,21 @@ def main():
     # Ill fix this later in the third version or some shit
     # Make sure the tournaments exist
     # Insert name as <host-name>
+    iteration = 1
     for tournament in file:
         players = getParticipants(tournament, apiKey)
         matches = getMatches(tournament, apiKey)
         date = getDate(tournament,apiKey) 
-        outputScores(players, matches, date)
+        outputScores(players, matches, date, iteration)
         print(tournament, "values computed")
+        iteration+= 1
     
     
     
     
     
             
-#main()
+main()
     
 #players = getParticipants()
 #matches = getMatches()
