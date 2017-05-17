@@ -3,7 +3,10 @@
 import file1
 from matches2 import *
 
-# Takes tournament name (eg. edmmelee-vapebracket10201
+# Takes tournament name (eg. edmmelee-vapebracket10201) and APIKey and returns a dictionary of participants
+# and their local tournament ID
+# If you just want the participant list you can list off the keys of the dictionary
+# Alternativiely I could change this to have an option that returns a list instead
 def getParticipants(name, apiKey):
     url = "https://api.challonge.com/v1/tournaments/" + name +"/participants.xml?api_key=" + apiKey
     txt = urlopen(url).read()
@@ -27,6 +30,9 @@ def getParticipants(name, apiKey):
    
     return parts
 
+# Takes tournament name (eg. edmmelee-vapebracket10201) and APIKey and returns a list of match objects
+# These match objects have a date so you can in theory sort all returned matches by the date they happened
+# They are ordered from round1 -> grand finals in a chronological order
 def getMatches(name, apiKey):
     url = "https://api.challonge.com/v1/tournaments/" + name +"/matches.xml?api_key=" + apiKey
     txt = urlopen(url).read()
@@ -100,3 +106,46 @@ def getMatches(name, apiKey):
         #count += 1
         
     return matches2 
+
+# Will prompt the user the specify the text file containing the apiKey as well
+# as a list of tournaments formatted as edmmelee-case21342
+# Will return large list of matches from all tournaments
+# Ordered in batches, first tournament processed, first tournament batch of matches
+# Ensure your input file's tournaments are listed chronologically
+# Although each match has a date attribute so you can process stuff using the date outside instead
+def createMatchList():
+    # open the file, ensuring a file exists 
+    while(True):
+        fileToOpen = input("Designate the file to open: ")
+        
+        try:
+            file = open(fileToOpen, 'r')
+            break
+        except:
+            print("File not found or cannot be opened")
+            
+    file = file.read()  
+    file = file.splitlines()
+    
+    # Pop the api key
+    apiKey = file.pop(0)
+    
+    # Process the data for each tournament
+    # This could error correct if the tournament name was copy/pasted wrong
+    # Ill fix this later in the third version or some shit
+    # Make sure the tournaments exist
+    # Insert name as <host-name>
+    iteration = 1
+    finalMatchList = []
+    for tournament in file:
+        matches = getMatches(tournament, apiKey)
+        for match in matches:
+            finalMatchList.append(match)
+        print(tournament, "values computed")
+        iteration+= 1
+
+    return finalMatchList
+        
+
+
+    
