@@ -113,16 +113,18 @@ def getMatches(name, apiKey):
 # Ordered in batches, first tournament processed, first tournament batch of matches
 # Ensure your input file's tournaments are listed chronologically
 # Although each match has a date attribute so you can process stuff using the date outside instead
-def createMatchList():
+# Has n
+def createMatchList(inputFile):
     # open the file, ensuring a file exists 
     while(True):
-        fileToOpen = input("Designate the file to open: ")
+        fileToOpen = inputFile
         
         try:
             file = open(fileToOpen, 'r')
             break
         except:
             print("File not found or cannot be opened")
+            return -1
             
     file = file.read()  
     file = file.splitlines()
