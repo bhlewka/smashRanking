@@ -3,6 +3,100 @@
 import file1
 from matches2 import *
 
-matches = getMatches("edmmelee-170505CASEMelee", "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE")
+# Takes tournament name (eg. edmmelee-vapebracket10201
+def getParticipants(name, apiKey):
+    url = "https://api.challonge.com/v1/tournaments/" + name +"/participants.xml?api_key=" + apiKey
+    txt = urlopen(url).read()
+    txt = txt.decode('utf-8')
+    parts = dict()
+    
+    # Text becomes an xml tree object
+    txt = ET.fromstring(txt)
+    
+    # Append each participant.name to list of participants
+    # While also stripping spaces/whitespace and making names lowercase
+    # This should be a dictionary
+    for part in txt:
+        
+        parts[part[0].text] = part[2].text.replace(" ","").lower()
+        
+        #player = []
+        #player.append(part[2].text.replace(" ","").lower())
+        #player.append(part[0].text)
+        #parts.append(player)
+   
+    return parts
 
-
+def getMatches(name, apiKey):
+    url = "https://api.challonge.com/v1/tournaments/" + name +"/matches.xml?api_key=" + apiKey
+    txt = urlopen(url).read()
+    txt = txt.decode('utf-8')
+    matches = []
+    participants = getParticipants(name, apiKey)
+    
+    # Text becomes an xml tree object
+    txt = ET.fromstring(txt)
+    
+    # Get date function will obselete
+    # Store date here instead
+    date = txt[0][11].text
+    
+    # Currently hardcoded, winner loser is index 9 10
+    # Better to do differently due to the way score is formatted
+    # player 1 is index 3, player 2 is index 4
+    # score is 29
+    ## Hardcoded for single digit scores
+    # Can be easily fixed for 2 digit scores in the future, split at the "-"
+    # Yeah, split here at version 3, if retard to's input meme scores itll fuck shit up
+    # This is fixed, score is now grabbed better
+    for match in txt:
+        ind = []
+        
+        # Ensuring the program doesn't go full retard if there is a negative score input may be a challenge
+        # Worst case is 2 negative scores, should not happen, however we can handle it
+        # If a score value is an empty string, we know the next score value must have a negative infront of it
+        # So maybe iterate over the split list
+        # If char = "" then pop char, insert to front of next char a "-"
+        
+        # Possibly include fix for meme games, if val is negative set a hard score
+        # detect whether a forfeit was encountered and set the score to a predefined DQ score
+        # instead of whatever the TO decides to do to signify the player did not "win" or "lose"
+        
+        #print(match[29].text)
+        score = match[29].text.split('-')
+        for char in score:
+            if char == "":
+                score.remove("")
+                score[0] = "-" + score[0]
+        #print(score)
+        
+        #player1, player1 score, player2, player2 score
+        ind.append(match[3].text)
+        ind.append(score[0])
+        ind.append(match[4].text)
+        ind.append(score[1])
+        matches.append(ind)
+        
+        
+    # Creates a list of match objects, should be done in the above loop but it can be here for now lol    
+    matches2 = []  
+    for match in matches:
+        player1 = participants[match[0]]
+        score1 = match[1]
+        player2 = participants[match[2]]
+        score2 = match[3]
+        
+        if (score1 > score2):
+            matches2.append(Match(player1, player2, score1, score2, date))
+        else:
+            matches2.append(Match(player2, player1, score2, score1, date))
+            
+        
+   
+    #Testing for indices    
+    #count = 0
+    #for thing in txt[0]:
+        #print(thing.text, count)
+        #count += 1
+        
+    return matches2 
