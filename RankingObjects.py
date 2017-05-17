@@ -25,13 +25,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import math
 
-
 class Player:
     # Class attribute
     # The system constant, which constrains
     # the change in volatility over time.
 
-    def __init__(self, name, rating = 1500, rd = 350, vol = 0.06):
+    def __init__(self, name, rating=1500, rd=350, vol=0.06):
         # For testing purposes, preload the values
         # assigned to an unrated player.
         self.rating = rating
@@ -43,7 +42,6 @@ class Player:
 
     _tau = 1.0
 
-    
     @property
     def rating(self):
         return (self.__rating * 173.7178) + 1500
@@ -59,7 +57,7 @@ class Player:
     @rd.setter
     def rd(self, rd):
         self.__rd = rd / 173.7178
-        
+
     @property
     def opponentList(self):
         return self.__opponentList
@@ -88,19 +86,20 @@ class Player:
     def _preRatingRD(self):
         """ Calculates and updates the player's rating deviation for the
         beginning of a rating period.
-        
+
         preRatingRD() -> None
-        
+
         """
         self.__rd = math.sqrt(math.pow(self.__rd, 2) + math.pow(self.vol, 2))
-        
-    def update_player(self):
+
+    def updatePlayer(self):
         """ Calculates the new rating and rating deviation of the player.
-        
+
         update_player(list[int], list[int], list[bool]) -> None
-        
+
         """
         if len(self.opponentList) == 0:
+            self.didNotCompete()
             return
 
         rating_list = [(x.rating - 1500) / 173.7178 for x in self.opponentList]
@@ -109,9 +108,9 @@ class Player:
         v = self._v(rating_list, RD_list)
         self.vol = self._newVol(rating_list, RD_list, v)
         self._preRatingRD()
-        
+
         self.__rd = 1 / math.sqrt((1 / math.pow(self.__rd, 2)) + (1 / v))
-        
+
         tempSum = 0
         for i in range(len(rating_list)):
             tempSum += self._g(RD_list[i]) * \
@@ -121,9 +120,9 @@ class Player:
 
     def _newVol(self, rating_list, RD_list, v):
         """ Calculating the new volatility as per the Glicko2 system.
-        
+
         _newVol(list, list, list) -> float
-        
+
         """
         i = 0
         delta = self._delta(rating_list, RD_list, v)
@@ -131,80 +130,91 @@ class Player:
         tau = self._tau
         x0 = a
         x1 = 0
-        
+
         while x0 != x1:
             # New iteration, so x(i) becomes x(i-1)
             x0 = x1
             d = math.pow(self.__rating, 2) + v + math.exp(x0)
             h1 = -(x0 - a) / math.pow(tau, 2) - 0.5 * math.exp(x0) \
-            / d + 0.5 * math.exp(x0) * math.pow(delta / d, 2)
+                                                / d + 0.5 * math.exp(x0) * math.pow(delta / d, 2)
             h2 = -1 / math.pow(tau, 2) - 0.5 * math.exp(x0) * \
-            (math.pow(self.__rating, 2) + v) \
-            / math.pow(d, 2) + 0.5 * math.pow(delta, 2) * math.exp(x0) \
-            * (math.pow(self.__rating, 2) + v - math.exp(x0)) / math.pow(d, 3)
+                                         (math.pow(self.__rating, 2) + v) \
+                                         / math.pow(d, 2) + 0.5 * math.pow(delta, 2) * math.exp(x0) \
+                                                            * (
+                                                            math.pow(self.__rating, 2) + v - math.exp(x0)) / math.pow(d,
+                                                                                                                      3)
             x1 = x0 - (h1 / h2)
 
         return math.exp(x1 / 2)
-        
+
     def _delta(self, rating_list, RD_list, v):
         """ The delta function of the Glicko2 system.
-        
+
         _delta(list, list, list) -> float
-        
+
         """
         tempSum = 0
         for i in range(len(rating_list)):
             tempSum += self._g(RD_list[i]) * (self.resultList[i] - self._E(rating_list[i], RD_list[i]))
         return v * tempSum
-        
+
     def _v(self, rating_list, RD_list):
         """ The v function of the Glicko2 system.
-        
+
         _v(list[int], list[int]) -> float
-        
+
         """
         tempSum = 0
         for i in range(len(rating_list)):
             tempE = self._E(rating_list[i], RD_list[i])
             tempSum += math.pow(self._g(RD_list[i]), 2) * tempE * (1 - tempE)
         return 1 / tempSum
-        
+
     def _E(self, p2rating, p2RD):
         """ The Glicko E function.
-        
+
         _E(int) -> float
-        
+
         """
         return 1 / (1 + math.exp(-1 * self._g(p2RD) * \
                                  (self.__rating - p2rating)))
-        
+
     def _g(self, RD):
         """ The Glicko2 g(RD) function.
-        
+
         _g() -> float
-        
+
         """
         return 1 / math.sqrt(1 + 3 * math.pow(RD, 2) / math.pow(math.pi, 2))
-        
-    def did_not_compete(self):
+
+    def didNotCompete(self):
         """ Applies Step 6 of the algorithm. Use this for
         players who did not compete in the rating period.
 
         did_not_compete() -> None
-        
+
         """
         self._preRatingRD()
-        
+
     def getAttributes(self):
         rating = self.rating
         name = self.name
         rd = self.rd
         vol = self.vol
-        #opponentList = self.opponentList
-        #resultList = self.resultList
-        
+        # opponentList = self.opponentList
+        # resultList = self.resultList
+
         return name, rating, rd, vol
-        
 
- 
 
+class Match:
+
+    def __init__(self, winner, loser, wScore, lScore):
+        self.winner = winner
+        self.loser = loser
+        self.wScore = wScore
+        self.lScore = lScore
+
+    def addMatchToPlayers(self):
+        self.winner.addMatch(self.loser, 1)
+        self.loser.addMatch(self.winner, 0)
