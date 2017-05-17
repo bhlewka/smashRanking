@@ -3,6 +3,9 @@ from urllib.request import urlopen
 import smtplib
 import xml.etree.ElementTree as ET
 
+from file1 import Match
+from glicko2 import Player
+
 # The next step of this program is to allow user to designate a text document containing urls for tournaments? 
 # What about returning a list of tournaments and allowing the user to designate which to include, going back to a certain date?
 # Renaming the tournaments in challonge would make things easier but who knows
@@ -41,10 +44,14 @@ def getMatches(name, apiKey):
     txt = urlopen(url).read()
     txt = txt.decode('utf-8')
     matches = []
+    participants = getParticipants(name, apiKey)
     
     # Text becomes an xml tree object
     txt = ET.fromstring(txt)
     
+    # Get date function will obselete
+    # Store date here instead
+    date = txt[0][11].text
     
     # Currently hardcoded, winner loser is index 9 10
     # Better to do differently due to the way score is formatted
@@ -74,11 +81,28 @@ def getMatches(name, apiKey):
                 score.remove("")
                 score[0] = "-" + score[0]
         #print(score)
+        
+        #player1, player1 score, player2, player2 score
         ind.append(match[3].text)
         ind.append(score[0])
         ind.append(match[4].text)
         ind.append(score[1])
         matches.append(ind)
+        
+        
+    # Creates a list of match objects, should be done in the above loop but it can be here for now lol    
+    matches2 = []  
+    for match in matches:
+        player1 = participants[match[0]]
+        score1 = match[1]
+        player2 = participants[match[2]]
+        score2 = match[3]
+        
+        if (score1 > score2):
+            matches2.append(Match(player1, player2, score1, score2, date))
+        else:
+            matches2.append(Match(player2, player1, score2, score1, date))
+            
         
    
     #Testing for indices    
@@ -87,7 +111,7 @@ def getMatches(name, apiKey):
         #print(thing.text, count)
         #count += 1
         
-    return matches   
+    return matches2   
 
 def getDate(name, apiKey):
     url = "https://api.challonge.com/v1/tournaments/" + name +"/matches.xml?api_key=" + apiKey
