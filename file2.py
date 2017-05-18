@@ -113,7 +113,6 @@ def getMatches(name, apiKey):
 # Ordered in batches, first tournament processed, first tournament batch of matches
 # Ensure your input file's tournaments are listed chronologically
 # Although each match has a date attribute so you can process stuff using the date outside instead
-# Has n
 def createMatchList(inputFile):
     # open the file, ensuring a file exists 
     while(True):
@@ -148,6 +147,16 @@ def createMatchList(inputFile):
 
     return finalMatchList
         
+# Here is a useful function for sorting the final output of the 
+# ordered elo scores
+# leave key=lambda alone
+# x:x.<whatever att to sort by>
+# reverse just makes it highest to lowest
 
+def sortPlayers(playerList):
+    # playerList will be a list of player basicPlayer objects
+    
+    
+    playerList.sort(key=lambda x: x.score, reverse=True)
 
     
