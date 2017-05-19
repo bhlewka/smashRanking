@@ -164,6 +164,20 @@ def getTournamentData(mode = 0):
         print(tournament, "values computed")
 
     return finalMatchList, list(finalParticipantSet)
+
+# Dear James
+# Here are your things to make
+
+def getRankings():
+    #code here
+    
+def updateRankings():
+    #code here
+    
+def outputRankings():
+    #code here
+
+
         
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
@@ -174,10 +188,6 @@ def getTournamentData(mode = 0):
 def sortPlayers(playerList):
     # playerList will be a list of player basicPlayer objects
     
-    
     playerList.sort(key=lambda x: x.score, reverse=True)
 
 
-c = getTournamentData()
-
-print(c[1])
