@@ -1,7 +1,12 @@
 # Challonge initialization
 # "File 2"
-import file1
-from matches2 import *
+import time
+from urllib.request import urlopen
+import smtplib
+import xml.etree.ElementTree as ET
+
+from RankingObjects import *
+#from matches2 import *
 
 # Takes tournament name (eg. edmmelee-vapebracket10201) and APIKey and returns a dictionary of participants
 # and their local tournament ID
@@ -113,39 +118,52 @@ def getMatches(name, apiKey):
 # Ordered in batches, first tournament processed, first tournament batch of matches
 # Ensure your input file's tournaments are listed chronologically
 # Although each match has a date attribute so you can process stuff using the date outside instead
-def createMatchList(inputFile):
-    # open the file, ensuring a file exists 
-    while(True):
-        fileToOpen = inputFile
-        
-        try:
-            file = open(fileToOpen, 'r')
-            break
-        except:
-            print("File not found or cannot be opened")
-            return -1
-            
-    file = file.read()  
-    file = file.splitlines()
+# Will also return a set containing all tags
+def getTournamentData(mode = 0):
     
-    # Pop the api key
-    apiKey = file.pop(0)
+    # Mode is the optional argument to put in a file instead
+    if(mode == 1):
+        # open the file, ensuring a file exists 
+        while(True):
+            fileToOpen = input("What is the name of the input file?: ")
+            
+            try:
+                file = open(fileToOpen, 'r')
+                break
+            except:
+                print("File not found or cannot be opened")
+                
+        file = file.read()  
+        file = file.splitlines()
+        
+        # Pop the api key
+        apiKey = file.pop(0)
+        
+    else:
+        apiKey = input("Enter your API key: ")
+        name = input("Enter the tournament name in the form <subdomain-name>: ")
+        file = []
+        file.append(name)
+        
     
     # Process the data for each tournament
     # This could error correct if the tournament name was copy/pasted wrong
     # Ill fix this later in the third version or some shit
     # Make sure the tournaments exist
     # Insert name as <host-name>
-    iteration = 1
     finalMatchList = []
+    finalParticipantSet = set()
     for tournament in file:
         matches = getMatches(tournament, apiKey)
+        participants = getParticipants(tournament, apiKey)
+        participants = list(participants.values())
         for match in matches:
             finalMatchList.append(match)
+        for part in participants:
+            finalParticipantSet.add(part)
         print(tournament, "values computed")
-        iteration+= 1
 
-    return finalMatchList
+    return finalMatchList, list(finalParticipantSet)
         
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
@@ -159,4 +177,7 @@ def sortPlayers(playerList):
     
     playerList.sort(key=lambda x: x.score, reverse=True)
 
-    
+
+c = getTournamentData()
+
+print(c[1])
