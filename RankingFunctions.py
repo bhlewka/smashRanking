@@ -277,8 +277,10 @@ def printRankings(rankingDict):
 
     sortPlayers(orderedRank)
 
+    rank = 0
     for player in orderedRank:
-        print(player.name, player.rating)
+        print(str(rank)+'.',player.name, int(player.rating))
+        rank += 1
         
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
