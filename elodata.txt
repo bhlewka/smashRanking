@@ -1,33 +1,62 @@
-name, rating, rd, vol
-sad 1500.0 350.0 0.06
-phantom 1500.0 350.0 0.06
-sqruimple 1500.0 350.0 0.06
-fedoralord552 1500.0 350.0 0.06
-minifedora 1500.0 350.0 0.06
-colt 1500.0 350.0 0.06
-zozzle 1500.0 350.0 0.06
-chicken 1500.0 350.0 0.06
-dew 1500.0 350.0 0.06
-s2j 1500.0 350.0 0.06
-crimsonbeast 1500.0 350.0 0.06
-smear 1500.0 350.0 0.06
-alphicans 1500.0 350.0 0.06
-cinder 1500.0 350.0 0.06
-pelican 1500.0 350.0 0.06
-lucky 1500.0 350.0 0.06
-jraff 1500.0 350.0 0.06
-jarobi 1500.0 350.0 0.06
-umr 1500.0 350.0 0.06
-boof 1500.0 350.0 0.06
-2/4lip 1500.0 350.0 0.06
-fox3345 1500.0 350.0 0.06
-ndiaz 1500.0 350.0 0.06
-maigai 1500.0 350.0 0.06
-dotcalm 1500.0 350.0 0.06
-merkzr 1500.0 350.0 0.06
-jedcruz 1500.0 350.0 0.06
-npo 1500.0 350.0 0.06
-hettman 1500.0 350.0 0.06
-medic 1500.0 350.0 0.06
-justjohn 1500.0 350.0 0.06
-lpm 1500.0 350.0 0.06
+dew
+limeee
+tagless
+kronos
+phantom
+figa
+jedcruz
+colt
+merkzr
+npo
+sdk
+mahman
+umr
+christinefromnetplay
+yardsale
+zozzle
+saber
+squirmple
+boof
+kull
+koreanking
+tulip
+jraff
+medic
+lpm
+silver
+l.p.m.
+jarobi
+jackied
+justjohn
+sad
+smear
+lucky
+dotcalm
+poppinfresh
+pelican
+ksc
+jure
+cinder
+maigai
+drummercon
+salamimommy
+tony
+salsa
+chicken
+2/4lip
+fedoralord552
+fox3345
+fedora_lord569
+kolby
+s2j
+chochang
+shroomish
+hettman
+nugs
+dumpmaster
+crimsonbeast
+saybn
+ndiaz
+sqruimple
+alphicans
+minifedora

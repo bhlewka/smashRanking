@@ -163,131 +163,78 @@ def getTournamentData(mode = 0):
             finalParticipantSet.add(part)
         print(tournament, "values computed")
 
-    return finalMatchList, list(finalParticipantSet)    
+    return finalMatchList, list(finalParticipantSet)
 
-def getTournament(rankingDict, mode = 0):
-
-    if (mode == 0):
-        matchList, entrantList = getTournamentData()
-    else:
-        matchList, entrantList = getTournamentData(1)
-
-    if len(rankingDict) == 0:
-        for entrant in entrantList:
-            rankingDict[entrant] = Player(entrant)
-    else:
-        for entrant in entrantList:
-            if entrant not in rankingDict:
-                while():
-                    check = input("If %s is a new player, press n, if %s is an alt tag, press a: " % (entrant, entrant))
-                    if check.lower() == "n":
-                        rankingDict[entrant] = Player(entrant)
-                        break
-                    elif check.lower() == "a":
-                        while():
-                            tag = input("Enter the original tag of this player: ")
-                            if tag.lower() in rankingDict:
-                                rankingDict[entrant] = rankingDict[tag.lower]
-                                break
-                            else:
-                                print("This tag is not found, try again.")
-                        break
-
-    for match in matchList:
-        match.winner = rankingDict[match.winner]
-        match.loser = rankingDict[match.loser]        
-        match.addMatchToPlayers()
-
-
-def getRankings():
-    while (True):
-        fileToOpen = input("What is the name of the ranking input file?: ")
-
-        try:
-            file = open(fileToOpen, 'r')
-            break
-        except:
-            print("File not found or cannot be opened")
-
-    file = file.read()
+#opens a text file and creates player objects
+def getRankings(rankingFile, playerDict):
+    
+    fileToOpen = open(rankingFile, "r")
+    file = fileToOpen.read()
     file = file.splitlines()
-
+    
     try:
         file.pop(0)
     except:
         pass
-
-    rankingDict = {}
-
-    # list containing all info
+    
+    #list containing all info
     playerInfo = list()
     for line in file:
         for person in line.split():
             playerInfo.append(person)
 
-    # create player objects
-    # x is name, x+1 is rating, x+2 is rd, x+3 is vol
+    #create player objects 
+    #x is name, x+1 is rating, x+2 is rd, x+3 is vol
     for x in range(0, len(playerInfo), 4):
-        rankingDict[playerInfo[x]] = Player(playerInfo[x])
-        rankingDict[playerInfo[x]].rating = float(playerInfo[x + 1])
-        rankingDict[playerInfo[x]].rd = float(playerInfo[x + 2])
-        rankingDict[playerInfo[x]].vol = float(playerInfo[x + 3])
-
-    return rankingDict
-
-
-def updateRankings(rankingDict):
-    for player in rankingDict:
-        rankingDict[player].updatePlayer()
-
-
-def outputRankings(rankingDict):
-    while (True):
-        fileToOpen = input("What is the name of the ranking output file?: ")
-        try:
-            file = open(fileToOpen, "w")
-            break
-        except:
-            print("File not found or cannot be opened")
-
+        playerDict[playerInfo[x]] = Player(playerInfo[x])
+        playerDict[playerInfo[x]].rating = float(playerInfo[x+1])
+        playerDict[playerInfo[x]].rd = float(playerInfo[x+2])
+        playerDict[playerInfo[x]].vol = float(playerInfo[x+3])
+         
+    return playerDict
+    
+    
+def updateRankings(playerDict):
+    
+    for player in playerDict:
+        playerDict[player].update_player()
+    
+    return playerDict
+        
+    
+def outputRankings(rankingFile, playerDict):
+    
+    fileToOpen = open(rankingFile, "w")
     file.write("")
     file.close()
-    file = open(fileToOpen, "a")
+    file = open(rankingFile, "a")    
 
     file.write("name, rating, rd, vol\n")
-    
-    orderedRanking = []
-    for player in rankingDict:
-        orderedRanking.append(rankingDict[player])
-        
-    sortPlayers(orderedRanking)
-        
-    for player in orderedRanking:
-        atts = (player.getAttributes())
+    for player in playerDict:
+        atts = (playerDict[player].getAttributes())
         file.write(str(atts).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
-        file.write("\n")
+        file.write("\n")        
     file.close()
-
-def printRankings(rankingDict):
-
+    
+def printRankings(playerDict):
+    
     orderedRank = []
-
-    for key in rankingDict:
-        orderedRank.append(rankingDict[key])
-
+    
+    for key in playerDict:
+        orderedRank.append(playerDict[key])
+    
     sortPlayers(orderedRank)
-
-    rank = 0
+    
     for player in orderedRank:
-        print(str(rank)+'.',player.name, int(player.rating))
-        rank += 1
+        print(player.name, player.rating)
         
+    return orderedRank
+             
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
 # leave key=lambda alone
 # x:x.<whatever att to sort by>
 # reverse just makes it highest to lowest
-
 
 def sortPlayers(playerList):
     # playerList will be a list of player basicPlayer objects
