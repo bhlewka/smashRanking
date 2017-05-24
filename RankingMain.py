@@ -3,7 +3,7 @@ import RankingFunctions
 
 def main():
 
-    while():
+    while(True):
         choice = input("Enter n to create new rankings, u to update existing: ")
         choice = choice.lower()
         if choice == "n":
@@ -13,11 +13,13 @@ def main():
             rankingDict = RankingFunctions.getRankings()
             break
 
-    while():
-        choice = input("Enter a to add a tournament, u to update rankings, o to output rankings, p to print rankings, or q to quit: ")
+    while(True):
+        choice = input("Enter a to add a tournament, m to add multiple tournaments, u to update rankings, o to output rankings, p to print rankings, or q to quit: ")
         choice = choice.lower()
         if choice == "a":
             RankingFunctions.getTournament(rankingDict)
+        elif choice == "m":
+            RankingFunctions.getTournament(rankingDict,1)
         elif choice == "u":
             RankingFunctions.updateRankings(rankingDict)
         elif choice == "o":
@@ -26,3 +28,5 @@ def main():
             RankingFunctions.printRankings(rankingDict)
         elif choice == "q":
             break
+
+main()
