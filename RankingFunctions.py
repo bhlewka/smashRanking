@@ -194,19 +194,67 @@ def getTournament(rankingDict):
         match.addMatchToPlayers()
 
 
-
-# Dear James
-# Here are your things to make
-
 def getRankings():
-    #code here
-    
+    while (True):
+        fileToOpen = input("What is the name of the ranking input file?: ")
+
+        try:
+            file = open(fileToOpen, 'r')
+            break
+        except:
+            print("File not found or cannot be opened")
+
+    file = fileToOpen.read()
+    file = file.splitlines()
+
+    try:
+        file.pop(0)
+    except:
+        pass
+
+    rankingDict = {}
+
+    # list containing all info
+    playerInfo = list()
+    for line in file:
+        for person in line.split():
+            playerInfo.append(person)
+
+    # create player objects
+    # x is name, x+1 is rating, x+2 is rd, x+3 is vol
+    for x in range(0, len(playerInfo), 4):
+        rankingDict[playerInfo[x]] = Player(playerInfo[x])
+        rankingDict[playerInfo[x]].rating = float(playerInfo[x + 1])
+        rankingDict[playerInfo[x]].rd = float(playerInfo[x + 2])
+        rankingDict[playerInfo[x]].vol = float(playerInfo[x + 3])
+
+    return rankingDict
+
+
 def updateRankings(rankingDict):
     for player in rankingDict:
-        player.updatePlayer()
+        rankingDict[player].updatePlayer()
 
-def outputRankings():
-    #code here
+
+def outputRankings(rankingDict):
+    while (True):
+        fileToOpen = input("What is the name of the ranking output file?: ")
+        try:
+            file = open(fileToOpen, "w")
+            break
+        except:
+            print("File not found or cannot be opened")
+
+    file.write("")
+    file.close()
+    file = open(fileToOpen, "a")
+
+    file.write("name, rating, rd, vol\n")
+    for player in rankingDict:
+        atts = (rankingDict[player].getAttributes())
+        file.write(str(atts).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
+        file.write("\n")
+    file.close()
 
 
         
