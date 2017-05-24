@@ -1,4 +1,4 @@
-from glicko2 import Player
+from RankingObjects import Player
 from matches import getParticipants
 
 #no inactivity implementation, no dq handling
@@ -79,7 +79,7 @@ def updatePlayers(playerDict):
 #updates playerDict with player info from input file
 def readElo(playerInfoInput, playerDict):
     
-    fileToOpen = open("player.txt", "r")
+    fileToOpen = open("elodata.txt", "r")
     file = fileToOpen.read()
     file = file.splitlines()
     try:

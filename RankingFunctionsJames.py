@@ -165,20 +165,57 @@ def getTournamentData(mode = 0):
 
     return finalMatchList, list(finalParticipantSet)
 
-# Dear James
-# Here are your things to make
+#opens a text file and creates player objects
+def getRankings(rankingFile, playerDict):
+    
+    fileToOpen = open(rankingFile, "r")
+    file = fileToOpen.read()
+    file = file.splitlines()
+    
+    try:
+        file.pop(0)
+    except:
+        pass
+    
+    #list containing all info
+    playerInfo = list()
+    for line in file:
+        for person in line.split():
+            playerInfo.append(person)
 
-def getRankings():
-    #code here
-    None
-def updateRankings():
-    #code here
-    None
-def outputRankings():
-    #code here
-    None
-
+    #create player objects 
+    #x is name, x+1 is rating, x+2 is rd, x+3 is vol
+    for x in range(0, len(playerInfo), 4):
+        playerDict[playerInfo[x]] = Player(playerInfo[x])
+        playerDict[playerInfo[x]].rating = float(playerInfo[x+1])
+        playerDict[playerInfo[x]].rd = float(playerInfo[x+2])
+        playerDict[playerInfo[x]].vol = float(playerInfo[x+3])
+         
+    return playerDict
+    
+    
+def updateRankings(playerDict):
+    
+    for player in playerDict:
+        playerDict[player].update_player()
+    
+    return playerDict
         
+    
+def outputRankings(rankingFile, playerDict):
+    
+    fileToOpen = open(rankingFile, "w")
+    file.write("")
+    file.close()
+    file = open(rankingFile, "a")    
+
+    file.write("name, rating, rd, vol\n")
+    for player in playerDict:
+        atts = (playerDict[player].getAttributes())
+        file.write(str(atts).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
+        file.write("\n")        
+    file.close()
+             
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
 # leave key=lambda alone
