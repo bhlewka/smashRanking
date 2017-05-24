@@ -165,15 +165,46 @@ def getTournamentData(mode = 0):
 
     return finalMatchList, list(finalParticipantSet)
 
+def getTournament(rankingDict):
+
+    matchList, entrantList = getTournamentData()
+
+    if len(rankingDict) == 0:
+        for entrant in entrantList:
+            rankingDict[entrant] = Player(entrant)
+    else:
+        for entrant in entrantList:
+            if entrant not in rankingDict:
+                while():
+                    check = input("If %s is a new player, press n, if %s is an alt tag, press a: " % (entrant, entrant))
+                    if check.lower() == "n":
+                        rankingDict[entrant] = Player(entrant)
+                        break
+                    elif check.lower() == "a":
+                        while():
+                            tag = input("Enter the original tag of this player: ")
+                            if tag.lower() in rankingDict:
+                                rankingDict[entrant] = rankingDict[tag.lower]
+                                break
+                            else:
+                                print("This tag is not found, try again.")
+                        break
+
+    for match in matchList:
+        match.addMatchToPlayers()
+
+
+
 # Dear James
 # Here are your things to make
 
 def getRankings():
     #code here
     
-def updateRankings():
-    #code here
-    
+def updateRankings(rankingDict):
+    for player in rankingDict:
+        player.updatePlayer()
+
 def outputRankings():
     #code here
 
