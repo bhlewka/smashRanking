@@ -209,12 +209,11 @@ class Player:
 
 class Match:
 
-    def __init__(self, winner, loser, wScore, lScore, date):
+    def __init__(self, winner, loser, wScore, lScore):
         self.winner = winner
         self.loser = loser
         self.wScore = wScore
         self.lScore = lScore
-        self.date = date
 
     def addMatchToPlayers(self):
         self.winner.addMatch(self.loser, 1)

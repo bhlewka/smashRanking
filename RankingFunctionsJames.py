@@ -215,6 +215,20 @@ def outputRankings(rankingFile, playerDict):
         file.write(str(atts).replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
         file.write("\n")        
     file.close()
+    
+def printRankings(playerDict):
+    
+    orderedRank = []
+    
+    for key in playerDict:
+        orderedRank.append(playerDict[key])
+    
+    sortPlayers(orderedRank)
+    
+    for player in orderedRank:
+        print(player.name, player.rating)
+        
+    return orderedRank
              
 # Here is a useful function for sorting the final output of the 
 # ordered elo scores
@@ -225,6 +239,6 @@ def outputRankings(rankingFile, playerDict):
 def sortPlayers(playerList):
     # playerList will be a list of player basicPlayer objects
     
-    playerList.sort(key=lambda x: x.score, reverse=True)
+    playerList.sort(key=lambda x: x.rating, reverse=True)
 
 
