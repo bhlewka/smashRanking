@@ -48,7 +48,7 @@ def getMatches(name, apiKey):
     # Text becomes an xml tree object
     txt = ET.fromstring(txt)
     
-    # Get date function will obselete
+    # Get date function will be obselete
     # Store date here instead
     date = txt[0][11].text
     
@@ -83,9 +83,14 @@ def getMatches(name, apiKey):
         #if(int(score[0]) < 0 or int(score[1]) < 0):
             #continue
             
+            
+        # If matches are not completed/ have no reported score or are missing required fields we will skip adding them to the match list
+        
+        if (match[3].text == None or match[4].text == None or match[29].text == None):
+            continue
+            
         score = match[29].text.split('-')
         if (len(score) > 2):
-            print("DQ detected")
             continue
         
         #player1, player1 score, player2, player2 score
@@ -187,20 +192,24 @@ def getTournament(rankingDict, mode = 0):
         entrantList.sort()
         for entrant in entrantList:
             if entrant not in rankingDict:
-                while(True):
+                loop = True
+                while(loop):
                     check = input("If %s is a new player, press n, if %s is an alt tag, press a: " % (entrant, entrant))
                     if check.lower() == "n":
                         rankingDict[entrant] = Player(entrant)
                         break
                     elif check.lower() == "a":
                         while(True):
-                            tag = input("Enter the original tag of this player: ")
+                            tag = input("Enter the original tag of this player, c to cancel: ")
                             if tag.lower() in rankingDict:
                                 rankingDict[entrant] = rankingDict[tag.lower()]
+                                loop = False
+                                break
+                            elif tag.lower() == "c":
                                 break
                             else:
                                 print("This tag is not found, try again.")
-                        break
+
     
     #if (mode == 0):
         #for match in matchList:
@@ -216,12 +225,12 @@ def getTournament(rankingDict, mode = 0):
             match.loser = rankingDict[match.loser]        
             match.addMatchToPlayers()
             
-        if (mode == 1):
-            updateRankings(rankingDict)
+        if mode == 1:
+            updateRankings(rankingDict, 0)
 
 
-def getRankings():
-    while (True):
+def getRankings(file = None):
+    while (file == None):
         fileToOpen = input("What is the name of the ranking input file?: ")
 
         try:
@@ -229,6 +238,7 @@ def getRankings():
             break
         except:
             print("File not found or cannot be opened")
+            file = None
 
     file = file.read()
     file = file.splitlines()
@@ -257,9 +267,9 @@ def getRankings():
     return rankingDict
 
 
-def updateRankings(rankingDict):
+def updateRankings(rankingDict, mode):
     for player in rankingDict:
-        rankingDict[player].updatePlayer()
+        rankingDict[player].updatePlayer(mode)
 
 
 def outputRankings(rankingDict):
@@ -322,8 +332,10 @@ def sortPlayers(playerList, option):
 
 # outputs the display rankings format based on mike wongs program
 # skips over the top 10 players
-def outputDisplayRankings(rankingDict):
+def outputDisplayRankings():
     displayedRank = []
+    
+    rankingDict = getRankings()
     
     for player in rankingDict:
         displayedRank.append(rankingDict[player])
