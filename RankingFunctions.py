@@ -85,6 +85,7 @@ def getMatches(name, apiKey):
             
         score = match[29].text.split('-')
         if (len(score) > 2):
+            print("DQ detected")
             continue
         
         #player1, player1 score, player2, player2 score
