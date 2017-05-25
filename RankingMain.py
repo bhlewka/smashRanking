@@ -26,6 +26,8 @@ def main():
             RankingFunctions.outputRankings(rankingDict)
         elif choice == "p":
             RankingFunctions.printRankings(rankingDict)
+        elif choice == "d":
+            RankingFunctions.outputDisplayRankings(rankingDict)
         elif choice == "q":
             break
 
