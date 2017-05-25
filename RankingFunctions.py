@@ -74,14 +74,19 @@ def getMatches(name, apiKey):
         # instead of whatever the TO decides to do to signify the player did not "win" or "lose"
         
         #print(match[29].text)
-        score = match[29].text.split('-')
-        for char in score:
-            if char == "":
-                score.remove("")
-                score[0] = "-" + score[0]
+        #score = match[29].text.split('-')
+        #for char in score:
+            #if char == "":
+                #score.remove("")
+                #score[0] = "-" + score[0]
         #print(score)
-        if(score[0] < 0 or score[1] < 0):
+        #if(int(score[0]) < 0 or int(score[1]) < 0):
+            #continue
+            
+        score = match[29].text.split('-')
+        if (len(score) > 2):
             continue
+        
         #player1, player1 score, player2, player2 score
         ind.append(match[3].text)
         ind.append(score[0])
