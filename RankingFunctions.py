@@ -48,7 +48,7 @@ def getMatches(name, apiKey):
     # Text becomes an xml tree object
     txt = ET.fromstring(txt)
     
-    # Get date function will obselete
+    # Get date function will be obselete
     # Store date here instead
     date = txt[0][11].text
     
@@ -82,11 +82,15 @@ def getMatches(name, apiKey):
         #print(score)
         #if(int(score[0]) < 0 or int(score[1]) < 0):
             #continue
-
-        try:
-            score = match[29].text.split('-')
-            if (len(score) > 2):
-                continue
+    
+        # If matches are not completed/ have no reported score or are missing required fields we will skip adding them to the match list
+        
+        if (match[3].text == None or match[4].text == None or match[29].text == None):
+            continue
+            
+        score = match[29].text.split('-')
+        if (len(score) > 2):
+            continue
 
         #player1, player1 score, player2, player2 score
             ind.append(match[3].text)
@@ -225,8 +229,8 @@ def getTournament(rankingDict, apiKey, mode = 0):
             updateRankings(rankingDict, 0)
 
 
-def getRankings():
-    while (True):
+def getRankings(file = None):
+    while (file == None):
         fileToOpen = input("What is the name of the ranking input file?: ")
 
         try:
@@ -234,6 +238,7 @@ def getRankings():
             break
         except:
             print("File not found or cannot be opened")
+            file = None
 
     file = file.read()
     file = file.splitlines()
@@ -327,8 +332,10 @@ def sortPlayers(playerList, option):
 
 # outputs the display rankings format based on mike wongs program
 # skips over the top 10 players
-def outputDisplayRankings(rankingDict):
+def outputDisplayRankings():
     displayedRank = []
+    
+    rankingDict = getRankings()
     
     for player in rankingDict:
         displayedRank.append(rankingDict[player])
