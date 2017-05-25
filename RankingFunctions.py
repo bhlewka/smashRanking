@@ -80,7 +80,8 @@ def getMatches(name, apiKey):
                 score.remove("")
                 score[0] = "-" + score[0]
         #print(score)
-        
+        if(score[0] < 0 or score[1] < 0):
+            continue
         #player1, player1 score, player2, player2 score
         ind.append(match[3].text)
         ind.append(score[0])
@@ -140,8 +141,8 @@ def getTournamentData(mode = 0):
         apiKey = file.pop(0)
         
     else:
-        #apiKey = input("Enter your API key: ")
-        apiKey = "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE"
+        apiKey = input("Enter your API key: ")
+        #apiKey = "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE"
         name = input("Enter the tournament name in the form <subdomain-name>: ")
         file = []
         file.append(name)
@@ -158,8 +159,8 @@ def getTournamentData(mode = 0):
         matches = getMatches(tournament, apiKey)
         participants = getParticipants(tournament, apiKey)
         participants = list(participants.values())
-        for match in matches:
-            finalMatchList.append(match)
+        # Append a list of matches to finalMatchList
+        finalMatchList.append(matches)
         for part in participants:
             finalParticipantSet.add(part)
         print(tournament, "values computed")
@@ -173,10 +174,11 @@ def getTournament(rankingDict, mode = 0):
     else:
         matchList, entrantList = getTournamentData(1)
 
-    if len(rankingDict) == 0:
+    if len(rankingDict) == 0 and (mode == 0):
         for entrant in entrantList:
             rankingDict[entrant] = Player(entrant)
     else:
+        entrantList.sort()
         for entrant in entrantList:
             if entrant not in rankingDict:
                 while(True):
@@ -193,11 +195,23 @@ def getTournament(rankingDict, mode = 0):
                             else:
                                 print("This tag is not found, try again.")
                         break
-
-    for match in matchList:
-        match.winner = rankingDict[match.winner]
-        match.loser = rankingDict[match.loser]        
-        match.addMatchToPlayers()
+    
+    #if (mode == 0):
+        #for match in matchList:
+            #match.winner = rankingDict[match.winner]
+            #match.loser = rankingDict[match.loser]        
+            #match.addMatchToPlayers()
+    
+    #this updates multiple tournaments
+    
+    for matchBatch in matchList:
+        for match in matchBatch:
+            match.winner = rankingDict[match.winner]
+            match.loser = rankingDict[match.loser]        
+            match.addMatchToPlayers()
+            
+        if (mode == 1):
+            updateRankings(rankingDict)
 
 
 def getRankings():
@@ -317,8 +331,8 @@ def outputDisplayRankings(rankingDict):
     rank = 1
     
     for player in displayedRank:
-        rank1 = str(rank) + '. '
-        line = rank1.rjust(3)+ player.name.ljust(20) + " " + str(int(player.rating)).ljust(10) + str(int(player.rd)) +"\n"
+        
+        line = str(rank) +',' + player.name+','+ str(int(player.rating)) +',' +str(int(player.rd)) + '\n'
         file.write(line)
         rank += 1
         
