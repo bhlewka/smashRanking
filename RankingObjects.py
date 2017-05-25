@@ -201,7 +201,11 @@ class Player:
         self._preRatingRD()
         self.inactivity += 1
         if self.inactivity > 1:
-            self.rd += 8
+            self.rd += 3
+        if self.inactivity > 3:
+            self.rd += 4
+        if self.inactivity > 5:
+            self.rd += 5
 
     def getAttributes(self):
         rating = self.rating

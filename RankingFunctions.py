@@ -82,8 +82,7 @@ def getMatches(name, apiKey):
         #print(score)
         #if(int(score[0]) < 0 or int(score[1]) < 0):
             #continue
-            
-            
+    
         # If matches are not completed/ have no reported score or are missing required fields we will skip adding them to the match list
         
         if (match[3].text == None or match[4].text == None or match[29].text == None):
@@ -92,13 +91,16 @@ def getMatches(name, apiKey):
         score = match[29].text.split('-')
         if (len(score) > 2):
             continue
-        
+
         #player1, player1 score, player2, player2 score
-        ind.append(match[3].text)
-        ind.append(score[0])
-        ind.append(match[4].text)
-        ind.append(score[1])
-        matches.append(ind)
+            ind.append(match[3].text)
+            ind.append(score[0])
+            ind.append(match[4].text)
+            ind.append(score[1])
+            matches.append(ind)
+
+        except AttributeError:
+            print("Unplayed match, continuing...")
         
         
     # Creates a list of match objects, should be done in the above loop but it can be here for now lol    
@@ -131,7 +133,7 @@ def getMatches(name, apiKey):
 # Ensure your input file's tournaments are listed chronologically
 # Although each match has a date attribute so you can process stuff using the date outside instead
 # Will also return a set containing all tags
-def getTournamentData(mode = 0):
+def getTournamentData(apiKey, mode = 0):
     
     # Mode is the optional argument to put in a file instead
     if(mode == 1):
@@ -152,8 +154,6 @@ def getTournamentData(mode = 0):
         apiKey = file.pop(0)
         
     else:
-        apiKey = input("Enter your API key: ")
-        #apiKey = "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE"
         name = input("Enter the tournament name in the form <subdomain-name>: ")
         file = []
         file.append(name)
@@ -178,12 +178,12 @@ def getTournamentData(mode = 0):
 
     return finalMatchList, list(finalParticipantSet)    
 
-def getTournament(rankingDict, mode = 0):
+def getTournament(rankingDict, apiKey, mode = 0):
 
     if (mode == 0):
-        matchList, entrantList = getTournamentData()
+        matchList, entrantList = getTournamentData(apiKey)
     else:
-        matchList, entrantList = getTournamentData(1)
+        matchList, entrantList = getTournamentData(apiKey, 1)
 
     if len(rankingDict) == 0 and (mode == 0):
         for entrant in entrantList:
