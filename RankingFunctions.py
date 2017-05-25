@@ -140,7 +140,8 @@ def getTournamentData(mode = 0):
         apiKey = file.pop(0)
         
     else:
-        apiKey = input("Enter your API key: ")
+        #apiKey = input("Enter your API key: ")
+        apiKey = "iRZrPhoDkyLV2xFXyUuJ5pVauosMlZPGMMmCdSaE"
         name = input("Enter the tournament name in the form <subdomain-name>: ")
         file = []
         file.append(name)
@@ -178,16 +179,16 @@ def getTournament(rankingDict, mode = 0):
     else:
         for entrant in entrantList:
             if entrant not in rankingDict:
-                while():
+                while(True):
                     check = input("If %s is a new player, press n, if %s is an alt tag, press a: " % (entrant, entrant))
                     if check.lower() == "n":
                         rankingDict[entrant] = Player(entrant)
                         break
                     elif check.lower() == "a":
-                        while():
+                        while(True):
                             tag = input("Enter the original tag of this player: ")
                             if tag.lower() in rankingDict:
-                                rankingDict[entrant] = rankingDict[tag.lower]
+                                rankingDict[entrant] = rankingDict[tag.lower()]
                                 break
                             else:
                                 print("This tag is not found, try again.")
@@ -259,8 +260,9 @@ def outputRankings(rankingDict):
     orderedRanking = []
     for player in rankingDict:
         orderedRanking.append(rankingDict[player])
-        
-    sortPlayers(orderedRanking)
+    
+    sortOption = input("How would you like to sort the output? n for name, r for rating: ")  
+    sortPlayers(orderedRanking, sortOption)
         
     for player in orderedRanking:
         atts = (player.getAttributes())
@@ -275,7 +277,7 @@ def printRankings(rankingDict):
     for key in rankingDict:
         orderedRank.append(rankingDict[key])
 
-    sortPlayers(orderedRank)
+    sortPlayers(orderedRank, "r")
 
     rank = 0
     for player in orderedRank:
@@ -289,9 +291,13 @@ def printRankings(rankingDict):
 # reverse just makes it highest to lowest
 
 
-def sortPlayers(playerList):
+def sortPlayers(playerList, option):
     # playerList will be a list of player basicPlayer objects
     
-    playerList.sort(key=lambda x: x.rating, reverse=True)
+    if (option == "r"):
+        playerList.sort(key=lambda x: x.rating, reverse=True)
+        
+    elif (option == "n"):
+        playerList.sort(key=lambda x: x.name, reverse=False)
 
 
