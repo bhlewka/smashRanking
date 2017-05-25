@@ -13,13 +13,15 @@ def main():
             rankingDict = RankingFunctions.getRankings()
             break
 
+    apiKey = input("Enter api key: ")
+
     while(True):
-        choice = input("Enter a to add a tournament, m to add multiple tournaments(and update in between), u to update rankings,\nun to update (non-decay), o to output rankings, p to print rankings, or q to quit: ")
+        choice = input("Enter a to add a tournament, m to add multiple tournaments(and update in between), u to update rankings,\nun to update (non-decay), o to output rankings, p to print rankings, d to output display rankings, or q to quit: ")
         choice = choice.lower()
         if choice == "a":
-            RankingFunctions.getTournament(rankingDict)
+            RankingFunctions.getTournament(rankingDict, apiKey)
         elif choice == "m":
-            RankingFunctions.getTournament(rankingDict,1)
+            RankingFunctions.getTournament(rankingDict, apiKey, 1)
         elif choice == "u":
             RankingFunctions.updateRankings(rankingDict, 0)
         elif choice == "un":
