@@ -301,3 +301,26 @@ def sortPlayers(playerList, option):
         playerList.sort(key=lambda x: x.name, reverse=False)
 
 
+def outputDisplayRankings(rankingDict):
+    displayedRank = []
+    
+    for player in rankingDict:
+        displayedRank.append(rankingDict[player])
+        
+    for player in displayedRank:
+        player.rating = player.rating - (2*player.rd)
+        
+    sortPlayers(displayedRank, "r")
+    
+    
+    file = open("displayedRanking.txt", "w")
+    rank = 1
+    
+    for player in displayedRank:
+        rank1 = str(rank) + '. '
+        line = rank1.rjust(3)+ player.name.ljust(20) + " " + str(int(player.rating)).ljust(10) + str(int(player.rd)) +"\n"
+        file.write(line)
+        rank += 1
+        
+    file.close
+    
