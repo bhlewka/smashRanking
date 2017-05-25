@@ -14,14 +14,16 @@ def main():
             break
 
     while(True):
-        choice = input("Enter a to add a tournament, m to add multiple tournaments(and update in between), u to update rankings,\no to output rankings, p to print rankings, or q to quit: ")
+        choice = input("Enter a to add a tournament, m to add multiple tournaments(and update in between), u to update rankings,\nun to update (non-decay), o to output rankings, p to print rankings, or q to quit: ")
         choice = choice.lower()
         if choice == "a":
             RankingFunctions.getTournament(rankingDict)
         elif choice == "m":
             RankingFunctions.getTournament(rankingDict,1)
         elif choice == "u":
-            RankingFunctions.updateRankings(rankingDict)
+            RankingFunctions.updateRankings(rankingDict, 0)
+        elif choice == "un":
+            RankingFunctions.updateRankings(rankingDict, 1)
         elif choice == "o":
             RankingFunctions.outputRankings(rankingDict)
         elif choice == "p":

@@ -30,7 +30,7 @@ class Player:
     # The system constant, which constrains
     # the change in volatility over time.
 
-    def __init__(self, name, rating=1500, rd=350, vol=0.1):
+    def __init__(self, name, rating=1500, rd=350, vol=0.08):
         # For testing purposes, preload the values
         # assigned to an unrated player.
         self.rating = rating
@@ -39,6 +39,7 @@ class Player:
         self.vol = vol
         self.opponentList = []
         self.resultList = []
+        self.inactivity = 0
 
     _tau = 1.0
 
@@ -92,15 +93,18 @@ class Player:
         """
         self.__rd = math.sqrt(math.pow(self.__rd, 2) + math.pow(self.vol, 2))
 
-    def updatePlayer(self):
+    def updatePlayer(self, mode):
         """ Calculates the new rating and rating deviation of the player.
 
         update_player(list[int], list[int], list[bool]) -> None
 
         """
         if len(self.opponentList) == 0:
-            self.didNotCompete()
+            if mode == 0:
+                self.didNotCompete()
             return
+
+        self.inactivity = 0
 
         rating_list = [(x.rating - 1500) / 173.7178 for x in self.opponentList]
         RD_list = [x.rd / 173.7178 for x in self.opponentList]
@@ -195,6 +199,9 @@ class Player:
 
         """
         self._preRatingRD()
+        self.inactivity += 1
+        if self.inactivity > 1:
+            self.rd += 8
 
     def getAttributes(self):
         rating = self.rating

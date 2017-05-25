@@ -186,20 +186,24 @@ def getTournament(rankingDict, mode = 0):
         entrantList.sort()
         for entrant in entrantList:
             if entrant not in rankingDict:
-                while(True):
+                loop = True
+                while(loop):
                     check = input("If %s is a new player, press n, if %s is an alt tag, press a: " % (entrant, entrant))
                     if check.lower() == "n":
                         rankingDict[entrant] = Player(entrant)
                         break
                     elif check.lower() == "a":
                         while(True):
-                            tag = input("Enter the original tag of this player: ")
+                            tag = input("Enter the original tag of this player, c to cancel: ")
                             if tag.lower() in rankingDict:
                                 rankingDict[entrant] = rankingDict[tag.lower()]
+                                loop = False
+                                break
+                            elif tag.lower() == "c":
                                 break
                             else:
                                 print("This tag is not found, try again.")
-                        break
+
     
     #if (mode == 0):
         #for match in matchList:
@@ -215,8 +219,8 @@ def getTournament(rankingDict, mode = 0):
             match.loser = rankingDict[match.loser]        
             match.addMatchToPlayers()
             
-        if (mode == 1):
-            updateRankings(rankingDict)
+        if mode == 1:
+            updateRankings(rankingDict, 0)
 
 
 def getRankings():
@@ -256,9 +260,9 @@ def getRankings():
     return rankingDict
 
 
-def updateRankings(rankingDict):
+def updateRankings(rankingDict, mode):
     for player in rankingDict:
-        rankingDict[player].updatePlayer()
+        rankingDict[player].updatePlayer(mode)
 
 
 def outputRankings(rankingDict):
