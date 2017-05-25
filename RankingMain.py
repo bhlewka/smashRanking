@@ -14,7 +14,7 @@ def main():
             break
 
     while(True):
-        choice = input("Enter a to add a tournament, m to add multiple tournaments, u to update rankings, o to output rankings, p to print rankings, or q to quit: ")
+        choice = input("Enter a to add a tournament, m to add multiple tournaments(and update in between), u to update rankings,\no to output rankings, p to print rankings, or q to quit: ")
         choice = choice.lower()
         if choice == "a":
             RankingFunctions.getTournament(rankingDict)

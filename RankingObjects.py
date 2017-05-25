@@ -30,7 +30,7 @@ class Player:
     # The system constant, which constrains
     # the change in volatility over time.
 
-    def __init__(self, name, rating=1500, rd=350, vol=0.06):
+    def __init__(self, name, rating=1500, rd=350, vol=0.1):
         # For testing purposes, preload the values
         # assigned to an unrated player.
         self.rating = rating

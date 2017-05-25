@@ -1,128 +1,130 @@
-1. anjo                 1898      69
-2. jv                   1767      62
-3. yardsale             1765      69
-4. nugs                 1693      61
-5. jraff                1677      69
-6. ksc                  1661      62
-7. sylarius             1630      123
-8. bluezone             1600      141
-9. poppinfresh          1598      65
-10. tags                 1587      80
-11. dew                  1564      69
-12. limeee               1553      80
-13. pelican              1543      64
-14. naz                  1532      76
-15. kronos               1515      59
-16. chochang             1490      84
-17. npo                  1469      66
-18. mittens              1447      144
-19. minifedora           1421      91
-20. silver               1402      96
-21. alphicans            1393      156
-22. kull                 1391      73
-23. tulip                1377      67
-24. victra               1370      116
-25. salamimommy          1367      153
-26. approvedboat         1358      91
-27. fedoralord552        1330      87
-28. drummercon           1325      107
-29. smear                1325      106
-30. kelarisfromvancouver 1299      121
-31. kassey               1288      99
-32. woody                1288      149
-33. borz                 1280      144
-34. arca                 1234      236
-35. colt                 1222      92
-36. sad                  1219      114
-37. lift                 1217      133
-38. marru                1212      94
-39. medic                1211      165
-40. salsa                1201      106
-41. andhobbes            1198      177
-42. yawn                 1179      163
-43. ndiaz                1174      156
-44. figa                 1174      96
-45. squirmple            1164      104
-46. jedcruz              1156      169
-47. jackied              1146      98
-48. koreanking           1143      105
-49. loopy                1138      172
-50. unclegubsy           1109      118
-51. saybn                1108      198
-52. phantom              1105      95
-53. bigboy               1089      89
-54. takaio               1083      177
-55. asianjustinwong      1078      181
-56. bbro                 1067      186
-57. christinefromnetplay 1048      191
-58. hyper                1048      186
-59. chair                1044      210
-60. tony                 1044      119
-61. gouda                1036      181
-62. dr.love              1030      147
-63. conut                1019      210
-64. sendai               1006      189
-65. brayden16            1005      185
-66. trashman             1005      188
-67. kimil                1002      125
-68. scrubsauce           993       227
-69. cinder               992       129
-70. jure                 991       211
-71. boof                 987       101
-72. l.p.m.               984       138
-73. skittles             977       113
-74. bitepunch            969       153
-75. sdk                  961       107
-76. gumby                956       207
-77. tak                  955       210
-78. nicknasty            951       198
-79. neki                 950       234
-80. sunshine             934       220
-81. noxris               932       214
-82. rn                   928       207
-83. dotcalm              916       198
-84. crimsonbeast         909       194
-85. saber                908       119
-86. dynasty              907       168
-87. okada                905       208
-88. kcurb                889       223
-89. alpha                886       207
-90. coolalex             876       214
-91. maigai               865       206
-92. dunkmaster           858       200
-93. midnight             845       178
-94. turboscrub           830       234
-95. blueandyellowshirt   830       234
-96. wharplz              817       224
-97. jarobi               808       226
-98. gundamrobot          807       227
-99. knoff                797       236
-100. chickfungus          797       235
-101. apto                 781       218
-102. shift                777       112
-103. lunamelee            769       167
-104. butteeeers           762       219
-105. hettman              760       150
-106. zozzle               760       170
-107. fox3345              758       222
-108. chicken              758       215
-109. mahman               752       192
-110. royalty              752       226
-111. jetfuel              746       242
-112. scrublord3000        741       255
-113. merkzr               729       137
-114. nate                 728       245
-115. zedd                 724       199
-116. lillicoi             720       239
-117. ravnica              706       237
-118. taylorf              694       234
-119. gmoney               690       222
-120. cutieboy666          684       247
-121. chaizord             682       234
-122. leflur               676       241
-123. bent                 675       228
-124. tinyshroomish        654       160
-125. p0wer                650       232
-126. umr                  640       206
-127. dumpmaster           593       209
-128. tagless              409       261
+1,anjo,1903,68
+2,jv,1762,63
+3,yardsale,1754,70
+4,jraff,1698,68
+5,nuggles,1684,64
+6,ksc,1644,63
+7,sylarius,1627,122
+8,bluezone,1603,131
+9,poppinfresh,1599,64
+10,tags,1583,75
+11,dew,1564,68
+12,pelican,1542,64
+13,kronos,1522,58
+14,crusayer,1514,79
+15,limeee,1498,93
+16,chochang,1475,84
+17,npo,1473,67
+18,mittens,1449,142
+19,minifadora,1393,94
+20,silver,1388,95
+21,dopesamus,1387,172
+22,kull,1384,78
+23,alphicans,1379,157
+24,1lip,1360,73
+25,salamimommy,1356,152
+26,approved,1353,95
+27,victra,1344,114
+28,drummercon,1313,109
+29,smear,1303,105
+30,woody,1300,147
+31,fadoralord522,1289,95
+32,kasey,1272,99
+33,kelarisfromvancouver,1271,130
+34,borz,1247,147
+35,andhobbes,1241,176
+36,sad,1213,113
+37,salsa,1211,109
+38,justjohn,1210,101
+39,colt,1203,91
+40,yawn,1202,159
+41,lift,1199,137
+42,medic,1198,167
+43,figa,1153,98
+44,scruimple,1150,112
+45,ndiaz,1145,150
+46,arca,1145,246
+47,koreanking,1137,103
+48,loopy,1123,174
+49,jedcruz,1122,171
+50,jackied,1116,97
+51,unclegubsy,1107,120
+52,saybn,1094,198
+53,phantom,1080,94
+54,bbro,1070,188
+55,bigboy,1067,91
+56,asianjustinwong,1051,184
+57,hyper,1049,192
+58,chair,1045,223
+59,takaio,1037,180
+60,christinefromnetplay,1033,189
+61,trashman,1029,184
+62,tony,1027,118
+63,dr.love,1018,147
+64,brayden16,1009,189
+65,tak,1005,208
+66,gouda,997,184
+67,bitepunch,988,149
+68,scrubsauce,987,229
+69,gumby,981,202
+70,sendai,981,189
+71,boof,980,107
+72,l.p.m.,980,144
+73,cinder,978,137
+74,jure,972,213
+75,conut,968,212
+76,kimil,961,130
+77,dynasty,961,166
+78,sdk,948,106
+79,rn,947,196
+80,colby,943,113
+81,noxris,937,211
+82,neki,928,233
+83,sunshine,913,212
+84,alpha,912,203
+85,crimsonbeast,908,200
+86,okada,903,210
+87,saber,900,120
+88,dotcalm,891,198
+89,nicknasty,887,201
+90,kcurb,870,219
+91,coolalex,868,216
+92,maigai,837,207
+93,turboscrub,831,236
+94,blueandyellowshirt,831,236
+95,midnight,816,190
+96,lillicoi,806,231
+97,wharplz,804,224
+98,dunkmaster,800,209
+99,gundamrobot,799,228
+100,knoff,797,235
+101,hettman,797,143
+102,chickfungus,792,235
+103,mahman,791,193
+104,chicken,788,217
+105,jarobi,783,229
+106,scrublord3000,778,224
+107,apto,769,221
+108,royalty,768,240
+109,ravnica,767,220
+110,zedd,764,191
+111,merkzer,763,135
+112,moon,762,180
+113,jetfuel,761,227
+114,fox3345,760,233
+115,zozzle,745,176
+116,lunamelee,740,256
+117,cutieboy666,739,232
+118,butteeeers,736,232
+119,nate,736,239
+120,shift,733,117
+121,chaizord,712,228
+122,taylorf,707,230
+123,shroomish,669,159
+124,leflur,659,243
+125,gmoney,652,226
+126,bent,650,245
+127,umr,643,204
+128,p0wer,592,239
+129,dumpmaster,545,216
+130,tagless,433,259
