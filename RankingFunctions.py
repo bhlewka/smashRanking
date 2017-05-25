@@ -314,7 +314,8 @@ def sortPlayers(playerList, option):
     elif (option == "n"):
         playerList.sort(key=lambda x: x.name, reverse=False)
 
-
+# outputs the display rankings format based on mike wongs program
+# skips over the top 10 players
 def outputDisplayRankings(rankingDict):
     displayedRank = []
     
@@ -327,12 +328,14 @@ def outputDisplayRankings(rankingDict):
     sortPlayers(displayedRank, "r")
     
     
-    file = open("displayedRanking.txt", "w")
+    file = open("displayedRanking.csv", "w")
     rank = 1
+    line = "Name,Score,Deviation\n"
+    file.write(line)
     
     for player in displayedRank:
         
-        line = str(rank) +',' + player.name+','+ str(int(player.rating)) +',' +str(int(player.rd)) + '\n'
+        line = player.name.capitalize()+','+ str(int(player.rating)) +',' +str(int(player.rd)) + '\n'
         file.write(line)
         rank += 1
         
