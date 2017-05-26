@@ -263,8 +263,17 @@ def getRankings():
 
 
 def updateRankings(rankingDict, mode):
+    playersToUpdate = []
     for player in rankingDict:
-        rankingDict[player].updatePlayer(mode)
+        if len(rankingDict[player].opponentList) != 0:
+            playersToUpdate.append(rankingDict[player])
+    for player in playersToUpdate:
+        player.updatePlayer(mode)
+    for player in rankingDict:
+        if rankingDict[player].updated == 0:
+            rankingDict[player].updatePlayer(mode)
+    for player in rankingDict:
+        rankingDict[player].updated = 0
 
 
 def outputRankings(rankingDict):

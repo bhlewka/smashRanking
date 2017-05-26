@@ -40,6 +40,7 @@ class Player:
         self.opponentList = []
         self.resultList = []
         self.inactivity = 0
+        self.updated = 0
 
     _tau = 1.0
 
@@ -99,6 +100,7 @@ class Player:
         update_player(list[int], list[int], list[bool]) -> None
 
         """
+        self.updated = 1
         if len(self.opponentList) == 0:
             if mode == 0:
                 self.didNotCompete()
