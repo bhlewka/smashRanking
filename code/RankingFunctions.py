@@ -389,3 +389,47 @@ def outputDisplayRankings():
         
     file.close
     
+def outputSeeding(rankingDict):
+    
+    while (True):
+        #fileToOpen = input("What is the name of the player input file?: ")
+
+        try:
+            file = open("seed.txt", 'r')
+            break
+        except:
+            print("File not found or cannot be opened, returning to menu")
+            file = None
+            break
+            
+
+    file = file.read()
+    file = file.splitlines()
+    
+    
+    
+    playerList = []
+    unseeded = []
+    for player in file:
+        
+        try:
+            playerList.append(rankingDict[player.lower().replace(" ","")])
+            
+        except:
+            unseeded.append(player)
+        
+    
+    output = open("seedingOutput.txt","w")
+    
+    sortPlayers(playerList, "r")
+    
+    for player in playerList:
+        output.write(player.name.capitalize())
+        output.write("\n")
+    
+    for player in unseeded:
+        output.write(player.capitalize())
+        output.write("\n")
+       
+    output.close
+    print("Seeding Complete")
