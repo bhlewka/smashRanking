@@ -33,7 +33,7 @@ def main():
         elif choice == "p":
             RankingFunctions.printRankings(rankingDict)
         elif choice == "d":
-            RankingFunctions.outputDisplayRankings(rankingDict)
+            RankingFunctions.outputDisplayRankings()
         elif choice == "q":
             break
 

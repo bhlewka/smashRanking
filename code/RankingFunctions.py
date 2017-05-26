@@ -93,14 +93,11 @@ def getMatches(name, apiKey):
             continue
 
         #player1, player1 score, player2, player2 score
-            ind.append(match[3].text)
-            ind.append(score[0])
-            ind.append(match[4].text)
-            ind.append(score[1])
-            matches.append(ind)
-
-        except AttributeError:
-            print("Unplayed match, continuing...")
+        ind.append(match[3].text)
+        ind.append(score[0])
+        ind.append(match[4].text)
+        ind.append(score[1])
+        matches.append(ind)
         
         
     # Creates a list of match objects, should be done in the above loop but it can be here for now lol    
@@ -356,11 +353,35 @@ def outputDisplayRankings():
     
     
     file = open("displayedRanking.csv", "w")
-    rank = 1
-    line = "Name,Score,Deviation\n"
+    rank = 0
+    line = "Name,Score,Deviation\n - - - - - - Diamond - - - - - - \n"
     file.write(line)
     
     for player in displayedRank:
+        
+        # Print rank seperators
+        # 10 15 10 15 10 15
+        # 10 20 35 50 60 75
+        # - - - - - - 
+        
+        if rank == 10:
+            file.write(" - - - - - - Gold - - - - - - \n")
+            
+        elif rank == 25:
+            file.write(" - - - - - - Silver 1 - - - - - - \n")
+            
+        elif rank == 35:
+            file.write(" - - - - - - Silver 2 - - - - - - \n")
+            
+        elif rank == 50:
+            file.write(" - - - - - - Bronze 1 - - - - - - \n")
+            
+        elif rank == 60:
+            file.write(" - - - - - - Bronze 2 - - - - - - \n")
+            
+        elif rank == 75:
+            file.write(" - - - - - - Starter - - - - - - \n")
+            
         
         line = player.name.capitalize()+','+ str(int(player.rating)) +',' +str(int(player.rd)) + '\n'
         file.write(line)
