@@ -87,10 +87,11 @@ def getMatches(name, apiKey):
         
         if (match[3].text == None or match[4].text == None or match[29].text == None):
             continue
-            
-        score = match[29].text.split('-')
-        if (len(score) > 2):
-            continue
+
+        try:
+            score = match[29].text.split('-')
+            if (len(score) > 2):
+                continue
 
         #player1, player1 score, player2, player2 score
             ind.append(match[3].text)
@@ -133,6 +134,7 @@ def getMatches(name, apiKey):
 # Ensure your input file's tournaments are listed chronologically
 # Although each match has a date attribute so you can process stuff using the date outside instead
 # Will also return a set containing all tags
+
 def getTournamentData(apiKey, mode = 0):
     
     # Mode is the optional argument to put in a file instead
@@ -258,11 +260,12 @@ def getRankings(file = None):
 
     # create player objects
     # x is name, x+1 is rating, x+2 is rd, x+3 is vol
-    for x in range(0, len(playerInfo), 4):
+    for x in range(0, len(playerInfo), 5):
         rankingDict[playerInfo[x]] = Player(playerInfo[x])
         rankingDict[playerInfo[x]].rating = float(playerInfo[x + 1])
         rankingDict[playerInfo[x]].rd = float(playerInfo[x + 2])
         rankingDict[playerInfo[x]].vol = float(playerInfo[x + 3])
+        rankingDict[playerInfo[x]].inactivity = int(playerInfo[x + 4])
 
     return rankingDict
 
@@ -294,7 +297,7 @@ def outputRankings(rankingDict):
     file.close()
     file = open(fileToOpen, "a")
 
-    file.write("name, rating, rd, vol\n")
+    file.write("name, rating, rd, vol, inactivity\n")
     
     orderedRanking = []
     for player in rankingDict:

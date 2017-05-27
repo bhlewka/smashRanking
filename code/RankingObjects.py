@@ -214,10 +214,11 @@ class Player:
         name = self.name
         rd = self.rd
         vol = self.vol
+        inactivity = self.inactivity
         # opponentList = self.opponentList
         # resultList = self.resultList
 
-        return name, rating, rd, vol
+        return name, rating, rd, vol, inactivity
 
 
 class Match:
