@@ -34,6 +34,8 @@ def main():
             RankingFunctions.printRankings(rankingDict)
         elif choice == "d":
             RankingFunctions.outputDisplayRankings()
+        elif choice == "s":
+            RankingFunctions.outputSeeding(rankingDict)
         elif choice == "q":
             break
 
