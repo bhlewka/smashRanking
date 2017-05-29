@@ -132,32 +132,31 @@ def getMatches(name, apiKey):
 # Although each match has a date attribute so you can process stuff using the date outside instead
 # Will also return a set containing all tags
 
-def getTournamentData(apiKey, mode = 0):
-    
+def getTournamentData(apiKey, mode=0):
     # Mode is the optional argument to put in a file instead
-    if(mode == 1):
-        # open the file, ensuring a file exists 
-        while(True):
+    if (mode == 1):
+        # open the file, ensuring a file exists
+        while (True):
             fileToOpen = input("What is the name of the input file?: ")
-            
+
             try:
                 file = open(fileToOpen, 'r')
                 break
             except:
                 print("File not found or cannot be opened")
-                
-        file = file.read()  
+
+        file = file.read()
         file = file.splitlines()
-        
+
         # Pop the api key
         apiKey = file.pop(0)
-        
+
     else:
         name = input("Enter the tournament name in the form <subdomain-name>: ")
-        file = []
-        file.append(name)
-        
-    
+        file = name
+        file += "\n"
+        file = file.splitlines()
+
     # Process the data for each tournament
     # This could error correct if the tournament name was copy/pasted wrong
     # Ill fix this later in the third version or some shit
@@ -166,16 +165,18 @@ def getTournamentData(apiKey, mode = 0):
     finalMatchList = []
     finalParticipantSet = set()
     for tournament in file:
-        matches = getMatches(tournament, apiKey)
-        participants = getParticipants(tournament, apiKey)
-        participants = list(participants.values())
+        if tournament:
+            matches = getMatches(tournament, apiKey)
+            participants = getParticipants(tournament, apiKey)
+            participants = list(participants.values())
+            print(tournament, "values computed")
         # Append a list of matches to finalMatchList
-        finalMatchList.append(matches)
+        else:
+            finalMatchList.append(matches)
         for part in participants:
             finalParticipantSet.add(part)
-        print(tournament, "values computed")
 
-    return finalMatchList, list(finalParticipantSet)    
+    return finalMatchList, list(finalParticipantSet)
 
 def getTournament(rankingDict, apiKey, mode = 0):
 
