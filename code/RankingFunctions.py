@@ -363,6 +363,8 @@ def outputDisplayRankings():
         # 10 15 10 15 10 15
         # 10 20 35 50 60 75
         # - - - - - - 
+        if player.name.capitalize() in ["Tags", "Bladewise", "Shogi"]:
+            continue
         
         if rank == 10:
             file.write(" - - - - - - Gold - - - - - - \n")
