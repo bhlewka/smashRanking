@@ -88,10 +88,9 @@ def getMatches(name, apiKey):
         if (match[3].text == None or match[4].text == None or match[29].text == None):
             continue
 
-        try:
-            score = match[29].text.split('-')
-            if (len(score) > 2):
-                continue
+        score = match[29].text.split('-')
+        if (len(score) > 2):
+            continue
 
         #player1, player1 score, player2, player2 score
         ind.append(match[3].text)
