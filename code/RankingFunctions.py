@@ -155,7 +155,7 @@ def getTournamentData(apiKey, mode=0):
     else:
         name = input("Enter the tournament name in the form <subdomain-name>: ")
         file = name
-        file += "\n"
+        file += "\n1"
         file = file.splitlines()
 
     # Process the data for each tournament
