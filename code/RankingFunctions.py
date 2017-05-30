@@ -122,7 +122,7 @@ def getMatches(name, apiKey):
     #for thing in txt[0]:
         #print(thing.text, count)
         #count += 1
-        
+
     return matches2 
 
 # Will prompt the user the specify the text file containing the apiKey as well
@@ -165,15 +165,17 @@ def getTournamentData(apiKey, mode=0):
     # Insert name as <host-name>
     finalMatchList = []
     finalParticipantSet = set()
+    matches = []
     for tournament in file:
-        if tournament:
-            matches = getMatches(tournament, apiKey)
+        if len(tournament) > 2:
+            matches += getMatches(tournament, apiKey)
             participants = getParticipants(tournament, apiKey)
             participants = list(participants.values())
             print(tournament, "values computed")
         # Append a list of matches to finalMatchList
         else:
             finalMatchList.append(matches)
+            matches = []
         for part in participants:
             finalParticipantSet.add(part)
 
