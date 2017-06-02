@@ -270,6 +270,18 @@ def getRankings(file = None):
 
     return rankingDict
 
+def addIndividual(rankingDict):
+    while True:
+        winner = input("Enter winner's tag: ")
+        if winner in rankingDict:
+            break
+    while True:
+        loser = input("Enter loser's tag: ")
+        if loser in rankingDict:
+            break
+
+    match = Match(rankingDict[winner], rankingDict[loser], 1, 0, "elo")
+    match.addMatchToPlayers()
 
 def updateRankings(rankingDict, mode):
     playersToUpdate = []

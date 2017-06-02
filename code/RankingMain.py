@@ -17,13 +17,18 @@ def main():
 
     while(True):
 
-        choice = input("Enter 'a' to add a tournament\nEnter 'm' to add multiple tournaments(and update in between)\nEnter 'u' to update rankings\nEnter 'un' to update (non-decay)\nEnter 'o' to output rankings\nEnter 'p' to print rankings\nEnter 'q' to quit: ")
+        choice = input("Enter 'a' to add a tournament\nEnter 'm' to add multiple tournaments(and update in between)\n"
+                       "Enter 'u' to update rankings\nEnter 'un' to update (non-decay)\nEnter 'o' to output rankings\n"
+                       "Enter 'p' to print rankings\nEnter 'd' to output excel rankings\n"
+                       "Enter 'i' to add individual match\nEnter 'q' to quit: ")
 
         choice = choice.lower()
         if choice == "a":
             RankingFunctions.getTournament(rankingDict, apiKey)
         elif choice == "m":
             RankingFunctions.getTournament(rankingDict, apiKey, 1)
+        elif choice == "i":
+            RankingFunctions.addIndividual(rankingDict)
         elif choice == "u":
             RankingFunctions.updateRankings(rankingDict, 0)
         elif choice == "un":
