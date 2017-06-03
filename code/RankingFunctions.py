@@ -119,7 +119,7 @@ def getMatches(name, apiKey):
     #for thing in txt[0]:
         #print(thing.text, count)
         #count += 1
-        
+
     return matches2 
 
 # Will prompt the user the specify the text file containing the apiKey as well
@@ -152,7 +152,7 @@ def getTournamentData(apiKey, mode=0):
     else:
         name = input("Enter the tournament name in the form <subdomain-name>: ")
         file = name
-        file += "\n"
+        file += "\n1"
         file = file.splitlines()
 
     # Process the data for each tournament
@@ -162,15 +162,17 @@ def getTournamentData(apiKey, mode=0):
     # Insert name as <host-name>
     finalMatchList = []
     finalParticipantSet = set()
+    matches = []
     for tournament in file:
-        if tournament:
-            matches = getMatches(tournament, apiKey)
+        if len(tournament) > 2:
+            matches += getMatches(tournament, apiKey)
             participants = getParticipants(tournament, apiKey)
             participants = list(participants.values())
             print(tournament, "values computed")
         # Append a list of matches to finalMatchList
         else:
             finalMatchList.append(matches)
+            matches = []
         for part in participants:
             finalParticipantSet.add(part)
 
@@ -265,6 +267,18 @@ def getRankings(file = None):
 
     return rankingDict
 
+def addIndividual(rankingDict):
+    while True:
+        winner = input("Enter winner's tag: ")
+        if winner in rankingDict:
+            break
+    while True:
+        loser = input("Enter loser's tag: ")
+        if loser in rankingDict:
+            break
+
+    match = Match(rankingDict[winner], rankingDict[loser], 1, 0, "elo")
+    match.addMatchToPlayers()
 
 def updateRankings(rankingDict, mode):
     playersToUpdate = []
