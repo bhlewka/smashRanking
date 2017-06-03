@@ -93,14 +93,12 @@ def getMatches(name, apiKey):
             continue
 
         #player1, player1 score, player2, player2 score
-            ind.append(match[3].text)
-            ind.append(score[0])
-            ind.append(match[4].text)
-            ind.append(score[1])
-            matches.append(ind)
+        ind.append(match[3].text)
+        ind.append(score[0])
+        ind.append(match[4].text)
+        ind.append(score[1])
+        matches.append(ind)
 
-        except AttributeError:
-            print("Unplayed match, continuing...")
     # Creates a list of match objects, should be done in the above loop but it can be here for now lol    
     matches2 = []  
     for match in matches:
